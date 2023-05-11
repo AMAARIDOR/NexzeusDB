@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <sys/types.h>
+#include <string.h>
 
 void print_prompt() { printf("db > "); }
 
