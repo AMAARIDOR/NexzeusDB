@@ -5,8 +5,9 @@
 
 void print_prompt() { printf("db > "); }
 
-typedef struct {
-    char* buffer;
-    size_t buffer_length;
-    ssize_t input_length;
-} InputBuffer;
+int main(int argc, char* argv[]) {
+    while (true) {
+        // Read input and print the prompt
+        print_prompt();
+    }
+}
