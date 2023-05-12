@@ -16,7 +16,7 @@ typedef struct {
 //     StatementType type;
 // } Statement;
 
-// typedef enum { META_COMMAND_SUCCESS, META_COMMAND_UNRECOGNIZED_COMMAND } MetaCommandResult;
+typedef enum { META_COMMAND_SUCCESS, META_COMMAND_UNRECOGNIZED_COMMAND } MetaCommandResult;
 // typedef enum { PREPARE_SUCCESS, PREPARE_UNRECOGNIZED_STATEMENT } PrepareResult;
 // typedef enum { STATEMENT_INSERT, STATEMENT_SELECT } StatementType;
 
@@ -28,14 +28,14 @@ InputBuffer* new_input_buffer() {
     return input_buffer;
 }
 
-// MetaCommandResult do_meta_command(InputBuffer* input_buffer) {
-//     if (strcmp(input_buffer->buffer, ".exit") == 0) {
-//         close_input_buffer(input_buffer);
-//         exit(EXIT_SUCCESS);
-//     } else {
-//         return META_COMMAND_UNRECOGNIZED_COMMAND;
-//     }
-// }
+MetaCommandResult do_meta_command(InputBuffer* input_buffer) {
+    if (strcmp(input_buffer->buffer, ".exit") == 0) {
+        close_input_buffer(input_buffer);
+        exit(EXIT_SUCCESS);
+    } else {
+        return META_COMMAND_UNRECOGNIZED_COMMAND;
+    }
+}
 
 // PrepareResult prepare_statement(InputBuffer* input_buffer, Statement* statement) {
 //     if (strncmp(input_buffer->buffer, "insert", 6) == 0) {
@@ -61,8 +61,7 @@ InputBuffer* new_input_buffer() {
 // }
 
 void read_input(InputBuffer* input_buffer) {
-    ssize_t bytes_read = 
-        getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
+    ssize_t bytes_read = getline(&(input_buffer->buffer), &(input_buffer->buffer_length), stdin);
     if (bytes_read <= 0) {
         printf("Error reading input.\n");
         exit(EXIT_FAILURE);
@@ -87,22 +86,20 @@ int main(int argc, char* argv[]) {
                     case (META_COMMAND_SUCCESS):
                         continue; 
                     case (META_COMMAND_UNRECOGNIZED_COMMAND):
-                        printf("Unrecognized command '%s'\n", 
-                            input_buffer->buffer);
+                        printf("Unrecognized command '%s'\n", input_buffer->buffer);
                         continue;
                 }
             }
-            Statement statement;
-            switch (prepare_statement(input_buffer, &statement)) {
-                case (PREPARE_SUCCESS):
-                    break;
-                case (PREPARE_UNRECOGNIZED_STATEMENT):
-                    printf("Unrecognized keyword at start of '%s'.\n", 
-                        input_buffer->buffer);
-                    continue;
-            }
-            execute_statement(&statement);
-            printf("Executed.\n");
+            // Statement statement;
+            // switch (prepare_statement(input_buffer, &statement)) {
+            //     case (PREPARE_SUCCESS):
+            //         break;
+            //     case (PREPARE_UNRECOGNIZED_STATEMENT):
+            //         printf("Unrecognized keyword at start of '%s'.\n", input_buffer->buffer);
+            //         continue;
+            // }
+            // execute_statement(&statement);
+            // printf("Executed.\n");
         }
     }
 }
