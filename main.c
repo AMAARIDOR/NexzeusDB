@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
             close_input_buffer(input_buffer);
             exit(EXIT_SUCCESS);
         } else {
-            printf("Unrecognized commmand '.%s'\n", input_buffer->buffer);
+            printf("Unrecognized commmand '%s'.\n", input_buffer->buffer);
         }
     }
 }
