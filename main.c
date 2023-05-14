@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/types.h>
 
-void print_prompt() { printf("nxz >> "); }
+void print_prompt() { printf("sdb >> "); }
 
 typedef struct {
     char* buffer;
