@@ -1,8 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
 #include <sys/types.h>
+
+#define COLUMN_USERNAME_SIZE 32
+#define COLUMN_EMAIL_SIZE 255
+
+typedef struct {
+    uint32_t id;
+    char username[COLUMN_USERNAME_SIZE];
+    char email[COLUMN_EMAIL_SIZE];
+} Row;
 
 void print_prompt() { printf("sdb >> "); }
 
@@ -18,6 +28,7 @@ typedef enum { STATEMENT_INSERT, STATEMENT_SELECT } StatementType;
 
 typedef struct {
     StatementType type;
+    Row row_to_insert;
 } Statement;
 
 InputBuffer* new_input_buffer() {
